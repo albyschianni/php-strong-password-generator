@@ -7,8 +7,11 @@
     <title>Document</title>
 
     <?php
-        $length = $_GET["password"];
-     
+    $length = isset($_GET["password"]); 
+
+        require 'helper.php';
+
+        session_start();
     ?>
 
 </head>
@@ -25,11 +28,20 @@
 
     <?php
 
-        require 'helper.php';
+        
 
         if (isset($_GET["password"])) {
             $password = generatePassword($_GET["password"]);
-            echo $password;
+
+            
+            if ($password){
+            
+                $_SESSION["password"] = $password;
+
+                header('location: ./passwordPage.php');
+            } 
+
+            // echo $password;
         }
 
 
